@@ -1,37 +1,28 @@
-import Application from '../Application.js'
-import Environment from './Environment.js'
 
-import ComputerSetup from './Computer';
+import Application from "../Application.js";
 
 
+import Room from "./Room.js";
+// import MonitorScreen from './MonitorScreen';
 
-export default class World
-{
-    constructor()
-    {
-        this.application = new Application()
-        this.scene = this.application.scene
-        this.resources = this.application.resources
+import Lights from "./Lights";
 
-        // Wait for resources
-        this.resources.on('ready', () =>
-        {
-            // Setup
-         
-            this.environment = new Environment()
+export default class World {
+  constructor() {
+    this.application = new Application();
+    this.scene = this.application.scene;
+    this.resources = this.application.resources;
 
-            this.computerSetup = new ComputerSetup();
+    // Wait for resources
+    this.resources.on("ready", () => {
+      this.room = new Room();
+      // this.monitorScreen = new MonitorScreen();
+    });
+  }
 
-            console.log("this.computerSetup")
-            console.log(this.computerSetup)
-        })
-        
-    }
+  update() {
 
-    update()
-    {
-    
-        if (this.monitorScreen) this.monitorScreen.update();
-        if (this.environment) this.environment.update();
-    }
+    if (this.monitorScreen) this.monitorScreen.update();
+    // if (this.environment) this.environment.update();
+  }
 }

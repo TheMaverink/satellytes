@@ -1,38 +1,41 @@
 import * as THREE from "three";
 import Application from "./Application";
 
-import { WEBGL_ID_NAME } from "../config/consts";
+import { WEBGL_WRAPPER_ID_NAME,WEBGL_ID_NAME } from "../config/consts";
 
 export default class Renderer {
   constructor() {
     this.application = new Application();
-    // this.canvas = this.application.canvas
+    this.time = this.application.time;
     this.sizes = this.application.sizes;
     this.scene = this.application.scene;
+    this.cssScene = this.application.cssScene;
     this.camera = this.application.camera;
-    this.time = this.application.time;
 
     this.setInstance();
   }
 
   setInstance() {
     this.instance = new THREE.WebGLRenderer({
-      // canvas: this.canvas,
       antialias: true,
       alpha: true,
       powerPreference: "high-performance",
     });
 
+    this.instance.colorSpace = THREE.SRGBColorSpace
+
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
-    this.instance.setClearColor(0x000000, 0.0);
+    this.instance.setClearColor("#232721", 1);
 
+    // this.instance.physicallyCorrectLights = true; //not beneficial when textures are baked
+    this.instance.domElement.id= WEBGL_ID_NAME
     this.instance.domElement.style.position = "absolute";
     this.instance.domElement.style.zIndex = "1px";
     this.instance.domElement.style.top = "0px";
 
     document
-      .querySelector(`#${WEBGL_ID_NAME}`)
+      .querySelector(`#${WEBGL_WRAPPER_ID_NAME}`)
       ?.appendChild(this.instance.domElement);
 
     // this.instance.outputEncoding = THREE.sRGBEncoding;
@@ -45,9 +48,9 @@ export default class Renderer {
     // this.instance.setSize(this.sizes.width, this.sizes.height)
     // this.instance.setPixelRatio(this.sizes.pixelRatio)
 
-    this.uniforms = {
-      u_time: { value: 1 },
-    };
+    // this.uniforms = {
+    //   u_time: { value: 1 },
+    // };
   }
 
   resize() {
@@ -57,10 +60,11 @@ export default class Renderer {
 
   update() {
     this.application.camera.instance.updateProjectionMatrix();
-    if (this.uniforms) {
-      this.uniforms.u_time.value = Math.sin(this.time.current * 0.01);
-    }
+    // if (this.uniforms) {
+    //   this.uniforms.u_time.value = Math.sin(this.time.current * 0.01);
+    // }
 
     this.instance.render(this.scene, this.camera.instance);
+    // this.cssInstance.render(this.cssScene, this.camera.instance);
   }
 }

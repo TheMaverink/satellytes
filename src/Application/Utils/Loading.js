@@ -12,6 +12,7 @@ export default class Loading extends EventEmitter {
 
         this.scene = this.application.scene;
         this.on('loadedSource', (sourceName, loaded, toLoad) => {
+           
             this.progress = loaded / toLoad;
             UIEventBus.dispatch('loadedSource', {
                 sourceName: sourceName,

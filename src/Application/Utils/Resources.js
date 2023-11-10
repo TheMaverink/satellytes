@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import Application from "../Application";
 import EventEmitter from "./EventEmitter";
 
@@ -33,15 +33,21 @@ export default class Resources extends EventEmitter {
     for (const source of this.sources) {
       if (source.type === "gltfModel") {
         this.loaders.gltfLoader.load(source.path, (file) => {
+    
           this.sourceLoaded(source, file);
         });
       } else if (source.type === "texture") {
         this.loaders.textureLoader.load(source.path, (file) => {
-          file.encoding = THREE.sRGBEncoding;
+          // file.encoding = THREE.sRGBEncoding;
+          file.colorSpace = THREE.SRGBColorSpace
+
+          
+
           this.sourceLoaded(source, file);
         });
       } else if (source.type === "cubeTexture") {
         this.loaders.cubeTextureLoader.load(source.path, (file) => {
+
           this.sourceLoaded(source, file);
         });
       } else if (source.type === "audio") {

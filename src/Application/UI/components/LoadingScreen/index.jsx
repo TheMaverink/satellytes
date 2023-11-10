@@ -65,8 +65,6 @@ const LoadingScreen = () => {
         )} ... ${Math.round(data.progress * 100)}%`
       );
 
-      console.log("resources");
-      console.log(resources);
       if (resources.length > 8) {
         resources.shift();
       }

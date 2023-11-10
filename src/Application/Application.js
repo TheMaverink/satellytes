@@ -4,8 +4,10 @@ import Stats from "stats.js";
 import Debug from "./Utils/Debug.js";
 import Sizes from "./Utils/Sizes.js";
 import Time from "./Utils/Time.js";
-import Camera from "./Camera.js";
+import Mouse from "./Utils/Mouse";
+import Camera from "./Camera";
 import Renderer from "./Renderer.js";
+
 import World from "./World/World.js";
 import Resources from "./Utils/Resources.js";
 
@@ -36,18 +38,19 @@ export default class Application {
     // Setup
     this.debug = new Debug();
     this.sizes = new Sizes();
+    this.mouse = new Mouse();
     this.loading = new Loading();
     this.time = new Time();
     this.scene = new THREE.Scene();
     this.resources = new Resources(sources);
+
     this.camera = new Camera();
     this.renderer = new Renderer();
     this.world = new World();
 
-    this.ui = new UI();
+    // this.camera.createControls();
 
-    console.log("this.ui");
-    console.log(this.ui);
+    this.ui = new UI();
 
     const isDebug = isOnDebugMode();
 
