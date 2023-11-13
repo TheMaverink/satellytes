@@ -38,13 +38,33 @@ export default class Room {
         if (child.name === "screen1") {
           const boundingBox = new THREE.Box3().setFromObject(child);
 
+
+          const boundingBoxSize = new THREE.Vector3();
+
+          boundingBox.getSize(boundingBoxSize);
+
+          console.log("boundingBox");
+          console.log(boundingBox);
+
+          console.log("boundingBoxSize");
+          console.log(boundingBoxSize);
+
+          const boundingBoxHelper = new THREE.Box3Helper(boundingBox, "red"); // You can specify the color you want
+
+          // Add the bounding box helper to your scene
+          this.scene.add(boundingBoxHelper);
+
           const center = new THREE.Vector3();
           boundingBox.getCenter(center);
 
           console.log("center");
           console.log(center);
-        }
+        }else{
+          console.log("child")
+          console.log(child)
 
+          child.visible = false
+        }
       }
     });
   }

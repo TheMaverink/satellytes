@@ -1,11 +1,7 @@
-
 import Application from "../Application.js";
 
-
 import Room from "./Room.js";
-// import MonitorScreen from './MonitorScreen';
-
-import Lights from "./Lights";
+import MonitorScreen from "./MonitorScreen";
 
 export default class World {
   constructor() {
@@ -16,13 +12,13 @@ export default class World {
     // Wait for resources
     this.resources.on("ready", () => {
       this.room = new Room();
-      // this.monitorScreen = new MonitorScreen();
+      this.monitorScreen = new MonitorScreen();
+      console.log("this.monitorScreen");
+      console.log(this.monitorScreen);
     });
   }
 
   update() {
-
     if (this.monitorScreen) this.monitorScreen.update();
-    // if (this.environment) this.environment.update();
   }
 }

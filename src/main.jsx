@@ -22,6 +22,7 @@ const Root = () => {
 
   return (
     <>
+      <div id="css"></div>
       <div id={UI_ID_NAME}></div>
       <div id={WEBGL_WRAPPER_ID_NAME}></div>
     </>

@@ -18,7 +18,7 @@
     "react-dom": "^18.2.0",
     "stats.js": "^0.17.0",
     "styled-components": "^6.1.0",
-    "three": "^0.157.0"
+    "three": "^0.137.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

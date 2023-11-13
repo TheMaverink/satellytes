@@ -8,7 +8,7 @@ import Mouse from "./Utils/Mouse";
 import Camera from "./Camera";
 import Renderer from "./Renderer.js";
 
-import World from "./World/World.js";
+import World from "./World/index.js";
 import Resources from "./Utils/Resources.js";
 
 import Loading from "./Utils/Loading";
@@ -42,6 +42,7 @@ export default class Application {
     this.loading = new Loading();
     this.time = new Time();
     this.scene = new THREE.Scene();
+    this.cssScene = new THREE.Scene();
     this.resources = new Resources(sources);
 
     this.camera = new Camera();
